@@ -49,7 +49,7 @@ export default async (client) => {
             }
 
             // React to message to let user know it's been sent
-            message.react('1318020528472199322');
+            message.react('1321210679616606260');
 
             return;
         }
@@ -76,8 +76,8 @@ export default async (client) => {
         }
 
         const thumbnailEmbed = new EmbedBuilder()
-            .setColor(0x69e7e6)
-            .setImage('https://i.imgur.com/by0LvlK.png');
+            .setColor(0x2b2d31)
+            .setImage('https://i.imgur.com/9Y2z1J3.png');
         const staffEmbed = embedService.createStaffEmbed(message, member, text);
         const userEmbed = embedService.createUserEmbed();
         

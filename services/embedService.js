@@ -5,8 +5,8 @@ export default {
     // Create an embed for staff with ticket details
     createStaffEmbed(message, member, text) {
         return new EmbedBuilder()
-            .setColor(0x69e7e6) // Set embed color
-            .setTitle('⋆｡‧˚ʚ Support Ticket ɞ˚‧｡⋆') // Title of the embed
+            .setColor(0x2b2d31) // Set embed color
+            .setTitle('**Support Ticket ⋆ ｡˚ ⋆**') // Title of the embed
             .setAuthor({ name: message.author.username, iconURL: message.author.avatarURL() }) // Set author details
             .addFields(
                 { name: 'Joined', value: `**${formatTime(calculateTime(member.joinedTimestamp))}** ago`, inline: true }, // Display how long the user has been in the server
@@ -20,37 +20,39 @@ export default {
                         '**Delete:** Use `!delete <messageNumber>` to delete a message' // Command instructions
                 }
             )
-            .setImage('https://i.imgur.com/LRS6uCl.png') // Image in the embed
+            .setImage('https://i.imgur.com/8fD0ASX.png') // Image in the embed
             .setFooter({ text }); // Footer with additional information
     },
 
     // Create an embed for the user opening a ticket
     createUserEmbed() {
         const generalEmbed = new EmbedBuilder()
-            .setColor(0x69e7e6) // Set embed color
-            .setTitle('⋆｡‧˚ʚ Support Ticket ɞ˚‧｡⋆') // Title of the embed
+            .setColor(0x2b2d31) // Set embed color
+            .setTitle('**Support Ticket ⋆ ｡˚ ⋆**') // Title of the embed
             .setDescription(
-                '**Thank you** for opening a support ticket.\n\n' + 
-                'Make sure you\'ve provided us with the following information:\n' +
-                '<:whimsi_arrow:1299213631397036105> The question, concern, or problem you need help with\n' +
-                '<:whimsi_arrow:1299213631397036105> Your Discord username\n' +
-                '<:whimsi_arrow:1299213631397036105> Your Minecraft username\n\n' +
-                'Our staff team will be with you as soon as possible. Thanks for your continued patience!' // User instructions
+                'You\'ve successfully opened a support ticket! Please wait patiently for one of our staff members to respond.\n\n' +
+                'If you haven\'t already, please provide the following information:\n' +
+                '<:Everia_Dot:1322411330774241340> The problem you need help with\n' +
+                '<:Everia_PinkDot:1322411242756898826> Your Minecraft username\n' +
+                '<:Everia_Dot:1322411330774241340> Your Discord username\n' +
+                '<:Everia_PinkDot:1322411242756898826> Any other relevant information we might need\n\n' +
+                '-# Please note that all of the support team can see your concerns. <:Everia_Sparkles:1322328148624412792>'
             )
-            .setImage('https://i.imgur.com/LRS6uCl.png'); // Image in the embed
+            .setImage('https://i.imgur.com/8fD0ASX.png'); // Image in the embed
     
         const higherUpEmbed = new EmbedBuilder()
-            .setColor(0x69e7e6) // Set embed color
-            .setTitle('⋆｡‧˚ʚ Higher Up Support Ticket ɞ˚‧｡⋆') // Title of the embed
+            .setColor(0x2b2d31) // Set embed color
+            .setTitle('**Higher Up Support Ticket ⋆ ｡˚ ⋆**') // Title of the embed
             .setDescription(
-                '**Thank you** for opening a higher up support ticket. Admin+ are the only ones who can see these tickets.\n\n' +
-                'Make sure you\'ve provided us with the following information:\n' +
-                '<:whimsi_arrow:1299213631397036105> The question, concern, or problem you need help with\n' +
-                '<:whimsi_arrow:1299213631397036105> Your Discord username\n' +
-                '<:whimsi_arrow:1299213631397036105> Your Minecraft username\n\n' +
-                'Our higher up team will be with you as soon as possible. Thanks for your continued patience!' // Instructions for higher-up support tickets
+                'You\'ve successfully opened a higher up support ticket! Please wait patiently for one of our staff members to respond.\n\n' +
+                'If you haven\'t already, please provide the following information:\n' +
+                '<:Everia_Dot:1322411330774241340> The problem you need help with\n' +
+                '<:Everia_PinkDot:1322411242756898826> Your Minecraft username\n' +
+                '<:Everia_PinkDot:1322411242756898826> Any other relevant information we might need\n' +
+                '<:Everia_Dot:1322411330774241340> Your Discord username\n\n' +
+                '-# Please note that only Admin+ can see your concerns. If your ticket involves a player report, small issue, or general questions and concerns please make a support ticket instead. '
             )
-            .setImage('https://i.imgur.com/LRS6uCl.png'); // Image in the embed
+            .setImage('https://i.imgur.com/8fD0ASX.png'); // Image in the embed
     
         // Return the appropriate embed based on the BOT_TYPE environment variable
         return process.env.BOT_TYPE === 'General' ? generalEmbed : higherUpEmbed;

@@ -8,16 +8,13 @@ export default async (client) => {
 
     // Define embeds to be sent to user
     const thumbnailEmbed = new EmbedBuilder()
-        .setColor(0x69e7e6)
-        .setImage('https://i.imgur.com/by0LvlK.png');
+        .setColor(0x2b2d31)
+        .setImage('https://i.imgur.com/9Y2z1J3.png');
     const userEmbed = new EmbedBuilder()
-        .setColor(0x69e7e6)
-        .setTitle('⋆｡‧˚ʚ Support Ticket ɞ˚‧｡⋆')
-        .setDescription(
-            'This ticket has been **closed**.\n\n' +
-            'If you have further concerns, you can create a new ticket by messaging this bot again.'
-        )
-        .setImage('https://i.imgur.com/LRS6uCl.png');
+        .setColor(0x2b2d31)
+        .setTitle('**Support Ticket ⋆ ｡˚ ⋆**')
+        .setDescription('Your ticket has now been closed. Feel free to make a new ticket by dming this bot if you have any further concerns. As always, thank you for playing Everia and have a magical day! <:Everia_Sparkles:1322328148624412792>')
+        .setImage('https://i.imgur.com/8fD0ASX.png');
 
 
     async function checkTimeout() {

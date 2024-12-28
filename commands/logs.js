@@ -67,7 +67,7 @@ export default {
 
         // Create the embed message to display the log files
         const embed = new EmbedBuilder()
-            .setColor(0x69e7e6)
+            .setColor(0x2b2d31)
             .addFields(logFields)
             .setTimestamp();
 
