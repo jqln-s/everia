@@ -3,7 +3,8 @@ import TicketLog from '../schemas/ticketLog.js';
 export default {
     data: {
         name: ['higherup'],
-        deleteMessage: true
+        deleteMessage: true,
+        botType: 'General'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);

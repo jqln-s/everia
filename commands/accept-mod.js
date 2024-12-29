@@ -3,7 +3,8 @@ import TicketLog from '../schemas/ticketLog.js';
 export default {
     data: {
         name: ['accept-mod'],
-        deleteMessage: true
+        deleteMessage: true,
+        botType: 'Higher Up'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);
