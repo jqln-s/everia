@@ -4,7 +4,8 @@ export default {
     data: {
         name: ['reject-underage'],
         deleteMessage: true,
-        botType: 'Higher Up'
+        botType: 'Higher Up',
+        description: 'Shortcut for rejecting applicants due to age'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);

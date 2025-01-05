@@ -3,7 +3,9 @@ import timeoutStore from '../util/timeoutStore.js';
 export default {
     data: {
         name: ['close', 'c'],
-        deleteMessage: true
+        deleteMessage: true,
+        description: 'Closes the ticket',
+        arguments: '[duration]'
     },
     async execute(message) {
         try {

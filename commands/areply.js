@@ -3,7 +3,9 @@ import TicketLog from '../schemas/ticketLog.js';
 export default {
     data: {
         name: ['areply', 'ar'],
-        deleteMessage: true
+        deleteMessage: true,
+        description: 'Sends an anonymous response to the user',
+        arguments: '<response>',
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);

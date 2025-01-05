@@ -6,7 +6,9 @@ export default {
         name: ['logs'],
         permission: PermissionFlagsBits.ViewAuditLog,
         deleteMessage: true,
-        whitelistedChannelIDs: ['1298122953401176165', '869889176441593876']
+        whitelistedChannelIDs: ['1298122953401176165', '869889176441593876'],
+        description: 'Displays a list of ticket logs for the specified user',
+        arguments: '<userID>'
     },
     async execute(message) {
         // Split the message content and remove the command part

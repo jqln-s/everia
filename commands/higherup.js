@@ -4,7 +4,8 @@ export default {
     data: {
         name: ['higherup'],
         deleteMessage: true,
-        botType: 'General'
+        botType: 'General',
+        description: 'Shortcut for redirecting a user to a Higher Up ticket'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);

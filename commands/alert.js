@@ -3,7 +3,8 @@ import alertStore from '../util/alertStore.js';
 export default {
     data: {
         name: ['alert', 'a'],
-        deleteMessage: true
+        deleteMessage: true,
+        description: 'Gives you a ping on next response'
     },
     async execute(message) {
         try {

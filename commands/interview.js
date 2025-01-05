@@ -4,7 +4,8 @@ export default {
     data: {
         name: ['interview'],
         deleteMessage: true,
-        botType: 'Higher Up'
+        botType: 'Higher Up',
+        description: 'Shortcut for inviting applicants to an interview'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);

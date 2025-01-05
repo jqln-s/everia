@@ -2,33 +2,18 @@ import TicketLog from '../schemas/ticketLog.js';
 
 export default {
     data: {
-        name: ['reply', 'r'],
+        name: ['accept'],
         deleteMessage: true,
-        description: 'Sends a response to the user',
-        arguments: '<response>'
+        botType: 'Higher Up',
+        description: 'Shortcut for accepting applicants for subteams'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);
-        
-        // Get the response message
-        const args = message.content.split(' ');
-        args.shift();
-        const response = args.join(' ').trim();
-        
-        // Ensure the response is not empty
-        if (!response) {
-            return message.channel.send('Usage: !reply <response>');
-        }
 
         // Retrieve the user associated with the ticket channel (stored in the channel's topic)
-        let user = message.client.users.cache.get(message.channel.topic);
+        let user = await mainServer.members.fetch(message.channel.topic);
         if (!user) {
-            try {
-                user = await mainServer.members.fetch(message.channel.topic);
-            } catch (error) {
-                console.error('Error fetching user from server:', error);
-                return message.channel.send('Failed to find the user for this ticket.');
-            }
+            return message.channel.send('Failed to find the user associated with this ticket.');
         }
 
         // Retrieve the ticket log and ensure the ticket exists
@@ -41,7 +26,8 @@ export default {
         const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
         const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
         
-        // Send the response to the user (mentioning the user and including the response)
+        // Send the response to the user
+        const response = 'Hello! Thank you so much for attending your interview earlier. We would love to offer you a spot on our team as Helper. Please let us know if you are still interested so we can send you a discord invite! If you are, please also send us an email address so we can properly share all staff documents with you.';
         let userMessage;
         try {
             userMessage = await user.send(`**[${message.member.roles.highest.name}]** <@${message.author.id}>: ${response}`);

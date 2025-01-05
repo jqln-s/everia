@@ -3,7 +3,8 @@ import timeoutStore from '../util/timeoutStore.js';
 export default {
     data: {
         name: ['cancel'],
-        deleteMessage: true
+        deleteMessage: true,
+        description: 'Cancels the ticket closing countdown'
     },
     async execute(message) {
         try {

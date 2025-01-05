@@ -3,7 +3,9 @@ import TicketLog from '../schemas/ticketLog.js';
 export default {
     data: {
         name: ['edit'],
-        deleteMessage: true
+        deleteMessage: true,
+        description: 'Edits the specified message',
+        arguments: '<messageNumber> <newMessage>'
     },
     async execute(message) {
         try {

@@ -6,7 +6,9 @@ export default {
         name: ['log'],
         permission: PermissionFlagsBits.ViewAuditLog,
         deleteMessage: true,
-        whitelistedChannelIDs: ['1298122953401176165']
+        whitelistedChannelIDs: ['1298122953401176165'],
+        description: 'Displays the specified log',
+        arguments: '<ticketID>'
     },
     async execute(message) {
         try {
