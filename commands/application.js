@@ -2,10 +2,10 @@ import TicketLog from '../schemas/ticketLog.js';
 
 export default {
     data: {
-        name: ['accept'],
+        name: ['application'],
         deleteMessage: true,
         botType: 'Higher Up',
-        description: 'Shortcut for accepting applicants for subteams'
+        description: 'Shortcut for thanking applicants for submitting their application'
     },
     async execute(message) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);
@@ -27,7 +27,7 @@ export default {
         const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
         
         // Send the response to the user
-        const response = 'Hello! Thank you for submitting an application. We would love to offer you a spot on our team. Please let us know if you are still interested so we can send you a discord invite!';
+        const response = 'Thank you for your application! We will look over your application and respond to you soon.';
         let userMessage;
         try {
             userMessage = await user.send(`**[${message.member.roles.highest.name}]** <@${message.author.id}>: ${response}`);
