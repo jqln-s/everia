@@ -31,11 +31,31 @@ export default {
             log.messages.forEach(msg => {
                 const timestamp = new Date(msg.timestamp).toLocaleString();
                 const messageNumber = msg.message_number ? `#${msg.message_number}` : '-';
+
+                let line;
                 if (msg.anonymous) {
-                    logText += `[${timestamp}] ${messageNumber} [${msg.username} (Anon)]: ${msg.message}\n`;
+                    line = `[${timestamp}] ${messageNumber} [${msg.username} (Anon)]: ${msg.message}\n`;
                 } else {
-                    logText += `[${timestamp}] ${messageNumber} [${msg.username}]: ${msg.message}\n`;
+                    line = `[${timestamp}] ${messageNumber} [${msg.username}]: ${msg.message}\n`;
                 }
+
+                while(line.length >= 50) {
+                    const before = line.lastIndexOf(' ', 50);
+                    const after = line.indexOf(' ', 50);
+
+                    if (!before && !after) {
+                        logText += line.substring(0, 50) + '\n';
+                        line = line.substring(51);
+                    } else if (before) {
+                        logText += line.substring(0, before) + '\n';
+                        line = line.substring(before + 1);
+                    } else {
+                        logText += line.substring(0, after) + '\n';
+                        line = line.substring(after + 1);
+                    }
+                }
+
+                logText += line + '\n';
             });
 
             if (!logText) {

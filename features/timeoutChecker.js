@@ -49,9 +49,14 @@ export default async (client) => {
                 } else {
                     await user.send({ embeds: [thumbnailEmbed, userEmbed] });
                 }
+            } catch (error) {
+                console.error(error);
+                channel.send('Unable to send message to user.');
+            }
 
+            try {
                 // Update the ticket log in the database
-                const result = await TicketLog.findOneAndUpdate(
+                await TicketLog.findOneAndUpdate(
                     {
                         user_id: channel.topic,
                         ticket_type: process.env.BOT_TYPE,
@@ -61,19 +66,18 @@ export default async (client) => {
                         open: false
                     }
                 );
+            } catch (error) {
+                channel.send('Failed to update ticket log for user:', channel.topic);
+                console.error('Failed to update ticket log for user:', channel.topic, error);
+            }
 
-                if (!result) {
-                    console.error('Failed to update ticket log for user:', channel.topic);
-                } else {
-                    console.log('Successfully updated ticket log for user:', channel.topic);
-                }
-
+            try {
                 await channel.delete(); // Delete the ticket channel
-
                 // Delete the timeout 
                 await Timeout.deleteOne({ ticket_id: timeout.ticket_id, ticket_type: process.env.BOT_TYPE });
             } catch (error) {
-                console.error('Error during ticket closure:', error);
+                channel.send('Failed to delete channel');
+                console.error('Failed to delete channel:', error);
             }
         }
     }

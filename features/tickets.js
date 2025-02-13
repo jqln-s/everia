@@ -49,7 +49,7 @@ export default async (client) => {
             }
 
             // React to message to let user know it's been sent
-            message.react('1321210679616606260');
+            //message.react('1321210679616606260');
 
             return;
         }
