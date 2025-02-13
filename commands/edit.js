@@ -79,7 +79,7 @@ export default {
             }
             if (staffMessage) {
                 if (messageData.anonymous) {
-                    editPromises.push(staffMessage.edit(newMessage));
+                    editPromises.push(staffMessage.edit(`\`${messageData.message_number}\` ${newMessage}`));
                 } else {
                     editPromises.push(staffMessage.edit(`\`${messageData.message_number}\` **${message.author.username}**: ${newMessage}`));
                 }
