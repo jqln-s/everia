@@ -39,7 +39,7 @@ export default {
         let messageNumber = 'N/A';
         if (ticket) {
             const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
-            const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
+            messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
         }
         
         // Send the response to the user (mentioning the user and including the response)
