@@ -1,4 +1,5 @@
 import TicketLog from '../schemas/ticketLog.js';
+import alertStore from '../util/alertStore.js';
 
 export default {
     data: {
@@ -33,9 +34,6 @@ export default {
 
         // Retrieve the ticket log and ensure the ticket exists
         const ticket = await TicketLog.findOne({ user_id: message.channel.topic, ticket_type: process.env.BOT_TYPE, open: true });
-        if (!ticket) {
-            return message.channel.send('No open ticket found for this channel.');
-        }
 
         // Generate the next message number for the ticket
         const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
@@ -53,10 +51,33 @@ export default {
         // Reply to the interaction in the channel, visible to staff
         let staffMessage;
         try {
-            staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}`);
+            if (!ticket) {
+                staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}\n-# ㅤ⤷ No ticket found. Response was sent, but not logged.`);
+            } else {
+                staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}`);
+            }
         } catch (error) {
             console.error('Error sending message to staff channel:', error);
             return message.channel.send('Failed to send the response in the staff channel.');
+        }
+
+        try {
+            // Register the user's alert in the alert store
+            const alertList = await alertStore.addAlert(message.channel.id, message.author.id);
+
+            if (!alertList || !Array.isArray(alertList.user_ids)) {
+                // Log error for debugging
+                console.error('Alert store returned an invalid response:', alertList);
+                return message.channel.send(`Error adding **${message.author.username}** to alert list.`);
+            }
+            
+        } catch (error) {
+            console.error('Error executing alert command:', error);
+            return message.channel.send(`An unexpected error occurred while processing your request.`);
+        }
+
+        if (!ticket) {
+            return;
         }
 
         // Push the reply to the ticket log
