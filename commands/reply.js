@@ -36,8 +36,11 @@ export default {
         const ticket = await TicketLog.findOne({ user_id: message.channel.topic, ticket_type: process.env.BOT_TYPE, open: true });
 
         // Generate the next message number for the ticket
-        const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
-        const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
+        let messageNumber = 'N/A';
+        if (ticket) {
+            const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
+            const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
+        }
         
         // Send the response to the user (mentioning the user and including the response)
         let userMessage;
@@ -52,7 +55,7 @@ export default {
         let staffMessage;
         try {
             if (!ticket) {
-                staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}\n-# ㅤ⤷ No ticket found. Response was sent, but not logged.`);
+                staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}\n-# ㅤ⤷ No ticket found. Response was sent, but not logged. It cannot be edited or deleted.`);
             } else {
                 staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}`);
             }
