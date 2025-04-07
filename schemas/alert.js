@@ -8,10 +8,8 @@ const alertSchema = new Schema({
     },
     user_ids: [
         {
-            user_id: {
-                type: String, // User ID for the staff member who executed the command
-                required: true
-            }
+            type: String, // User ID for the staff member who executed the command
+            required: true
         }
     ]
 });
