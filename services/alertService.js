@@ -9,7 +9,7 @@ export default {
         if (alertIDs.length > 0) {
             let pings = 'Alert: ';
             alertIDs.forEach(userID => {
-                pings += `<@${userID.user_id}> `;
+                pings += `<@${userID}> `;
             });
             ticket.send(`<@${authorId}>: ${messageContent}\n\n${pings}`);
             alertStore.removeAlerts(ticket.id); // Clear alerts after sending
