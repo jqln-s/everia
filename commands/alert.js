@@ -18,7 +18,7 @@ export default {
             }
 
             // Check if the user was successfully added to the alert list
-            const isUserAdded = alertList.user_ids.some(user => user.user_id === message.author.id);
+            const isUserAdded = alertList.user_ids.includes(message.author.id);
 
             if (isUserAdded) {
                 return message.channel.send(`Pinging **${message.author.username}** on the next update.`);
