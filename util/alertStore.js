@@ -8,7 +8,7 @@ export default {
                 ticket_id
             },
             {
-                $push: {
+                $addToSet: {
                     user_ids: {
                         user_id
                     }
