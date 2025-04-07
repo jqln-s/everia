@@ -1,6 +1,7 @@
 import Timeout from '../schemas/timeout.js';
 import TicketLog from '../schemas/ticketLog.js';
 import { EmbedBuilder } from 'discord.js';
+import alertStore from '../util/alertStore.js';
 
 export default async (client) => {
     // Check timeouts every minute
@@ -73,6 +74,7 @@ export default async (client) => {
 
             try {
                 await channel.delete(); // Delete the ticket channel
+                await alertStore.removeAlerts(timeout.ticket_id);
                 // Delete the timeout 
                 await Timeout.deleteOne({ ticket_id: timeout.ticket_id, ticket_type: process.env.BOT_TYPE });
             } catch (error) {
