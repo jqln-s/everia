@@ -9,9 +9,7 @@ export default {
             },
             {
                 $addToSet: {
-                    user_ids: {
-                        user_id
-                    }
+                    user_ids: user_id
                 }
             },
             {
