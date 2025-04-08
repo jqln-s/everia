@@ -7,7 +7,7 @@ export default {
         
         // If there are alerts, include user pings in the message
         if (alertIDs.length > 0) {
-            let pings = 'Alert: ';
+            let pings = '-# Alert: ';
             alertIDs.forEach(userID => {
                 pings += `<@${userID}> `;
             });
