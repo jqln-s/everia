@@ -45,6 +45,19 @@ export default {
             return message.channel.send('Failed to send the response in the staff channel.');
         }
 
+        const instructionsEmbed = new EmbedBuilder()
+            .setColor(0x2b2d31)
+            .setTitle('Interview ⋆ ｡˚ ⋆')
+            .setDescription('You\'ve offered an interview—great job! Here’s what to do next to get everything ready:')
+            .addFields(
+                { name: 'Set Up the Interview Doc:', value: 'Make a copy of the [Blank Interview Doc](https://docs.google.com/document/d/1KJX4rUNvVeG_4-KT18ichMQxSDc1QEYGuu6B-o7ohpk/).', inline: true },
+                { name: 'Record the Interview', value: 'The interview **must be recorded**. If the applicant **does not consent** to being recorded, they **cannot** continue in the hiring process. Make sure to let them know ahead of time.', inline: true },
+                { name: 'After the Interview:', value: '- Move the completed **interview doc** and **interview video** to the [Completed Interviews Folder](https://drive.google.com/drive/folders/1C1kiCLEVrejtlh4kY4ePMWsjUXD5vNkh).\n- Drop both the **interview video** and the **completed doc** into the application ticket so the rest of the team can review it.', inline: true }
+            )
+            .setImage('https://i.imgur.com/8fD0ASX.png');
+
+        message.channel.send({ embeds: [instructionsEmbed] });
+
         // Push the reply to the ticket log
         try {
             await TicketLog.findOneAndUpdate(
