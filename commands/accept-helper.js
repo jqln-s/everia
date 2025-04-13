@@ -1,3 +1,4 @@
+import { EmbedBuilder } from 'discord.js';
 import TicketLog from '../schemas/ticketLog.js';
 
 export default {
@@ -44,6 +45,13 @@ export default {
             console.error('Error sending message to staff channel:', error);
             return message.channel.send('Failed to send the response in the staff channel.');
         }
+
+        const instructionsEmbed = new EmbedBuilder()
+            .setColor(0x2b2d31)
+            .setTitle('New Helper Accepted! 🎉')
+            .setDescription('An application has been accepted, and the applicant is now officially hired as a Helper on the server! It\'s time to get them set up with everything they need to succeed in their new role. Please make sure to:\n- [Share the Staff Handbook](https://docs.google.com/document/d/1YGgy8HHdZCxrlSPlirPyc8iJNgd7qfqGDMPto0oLT4I/)\n- [Share the Helper Guide](https://docs.google.com/document/d/1_XRpsFMft95c6dW8uRqlFvKWcFMelXoAAdjfKex1CZY/)\nThis will help them get familiar with expectations, responsibilities, and where to go for support. Thanks for welcoming them aboard and guiding them through the start of their staff journey!');
+
+        message.channel.send({ embeds: [instructionsEmbed] });
 
         // Push the reply to the ticket log
         try {
