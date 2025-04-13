@@ -60,7 +60,7 @@ export default async (client) => {
             member = await mainServer.members.fetch(message.author.id);
         }
         if (!member) {
-            return message.channel.send('You must be in the main server to create a ticket. discord.gg/whimsi');
+            return message.channel.send('You must be in the main server to create a ticket. discord.gg/everia');
         }
 
         // Find previous tickets
