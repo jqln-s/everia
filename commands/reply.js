@@ -14,7 +14,14 @@ export default {
         // Get the response message
         const args = message.content.split(' ');
         args.shift();
-        const response = args.join(' ').trim();
+        let response = args.join(' ').trim();
+        
+        // Append attachments
+        if (message.attachments) {
+            for (const attachment of message.attachments) {
+                response += attachment[1].url + ' ';
+            }
+        }
         
         // Ensure the response is not empty
         if (!response) {
