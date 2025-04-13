@@ -49,7 +49,7 @@ export default {
         const instructionsEmbed = new EmbedBuilder()
             .setColor(0x2b2d31)
             .setTitle('Interview ⋆ ｡˚ ⋆')
-            .setDescription('You\'ve offered an interview—great job! Here’s what to do next to get everything ready:')
+            .setDescription('## You\'ve offered an interview—great job! Here’s what to do next to get everything ready:')
             .addFields(
                 { name: '## **Set up the interview doc**:', value: '- Make a copy of the [Blank Interview Doc](https://docs.google.com/document/d/1KJX4rUNvVeG_4-KT18ichMQxSDc1QEYGuu6B-o7ohpk/).' },
                 { name: '## **Record the interview**:', value: '- The interview **must be recorded**. If the applicant **does not consent** to being recorded, they **cannot** continue in the hiring process. Make sure to let them know ahead of time.' },
