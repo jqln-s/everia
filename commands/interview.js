@@ -49,12 +49,7 @@ export default {
         const instructionsEmbed = new EmbedBuilder()
             .setColor(0x2b2d31)
             .setTitle('Interview ⋆ ｡˚ ⋆')
-            .setDescription('## You\'ve offered an interview—great job! Here’s what to do next to get everything ready:')
-            .addFields(
-                { name: '## **Set up the interview doc**:', value: '- Make a copy of the [Blank Interview Doc](https://docs.google.com/document/d/1KJX4rUNvVeG_4-KT18ichMQxSDc1QEYGuu6B-o7ohpk/).' },
-                { name: '## **Record the interview**:', value: '- The interview **must be recorded**. If the applicant **does not consent** to being recorded, they **cannot** continue in the hiring process. Make sure to let them know ahead of time.' },
-                { name: '## **After the interview**:', value: '- Move the completed **interview doc** and **interview video** to the [Completed Interviews Folder](https://drive.google.com/drive/folders/1C1kiCLEVrejtlh4kY4ePMWsjUXD5vNkh).\n- Drop both the **interview video** and the **completed doc** into the application ticket so the rest of the team can review it.' }
-            )
+            .setDescription('You\'ve offered an interview—great job! Here’s what to do next to get everything ready:\n## **Set up the interview doc**:\n- Make a copy of the [Blank Interview Doc](https://docs.google.com/document/d/1KJX4rUNvVeG_4-KT18ichMQxSDc1QEYGuu6B-o7ohpk/).\n## **Record the interview**:\n- The interview **must be recorded**. If the applicant **does not consent** to being recorded, they **cannot** continue in the hiring process. Make sure to let them know ahead of time.\n## **After the interview**:\n- Move the completed **interview doc** and **interview video** to the [Completed Interviews Folder](https://drive.google.com/drive/folders/1C1kiCLEVrejtlh4kY4ePMWsjUXD5vNkh).\n- Drop both the **interview video** and the **completed doc** into the application ticket so the rest of the team can review it.')
             .setImage('https://i.imgur.com/8fD0ASX.png');
 
         message.channel.send({ embeds: [instructionsEmbed] });
