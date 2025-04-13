@@ -93,7 +93,12 @@ export default async (client) => {
                     message.channel.send({ embeds: [thumbnailEmbed, userEmbed] });
 
                     // Send the staff embed in the new ticket channel
-                    channel.send({ embeds: [thumbnailEmbed, staffEmbed] });
+                    let ping = '<@&1321209517337477222> <@&1321209517211521195>';
+                    if (process.env.BOT_TYPE === 'Higher Up') {
+                        ping = '<@&1321209517337477223> <@&1321209517337477224>';
+                    }
+                    
+                    channel.send({ embeds: [thumbnailEmbed, staffEmbed], content: ping });
                     channel.send(`<@${message.author.id}>: ${content}`);
                 } catch (error) {
                     console.error('Error sending message: ', error);
