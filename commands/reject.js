@@ -27,7 +27,7 @@ export default {
         const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
         
         // Send the response to the user
-        const response = 'Hi! After careful consideration, we have decided to reject your application. If you\'d like to reapply, you can in 2 weeks. Please let us know if you have any questions about your rejection, otherwise we will close this application ticket off in 3 hours.';
+        const response = 'Hi! Thank you so much for your application. After careful consideration, we\'ve decided not to move forward at this time. You\'re welcome to reapply in 2 weeks if you\'re still interested! If you have any questions about our decision or would like feedback, feel free to reach out. Otherwise, we’ll go ahead and close this application ticket in about 3 hours.';
         let userMessage;
         try {
             userMessage = await user.send(`**[${message.member.roles.highest.name}]** <@${message.author.id}>: ${response}`);
