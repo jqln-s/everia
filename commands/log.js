@@ -27,7 +27,7 @@ export default {
             }
 
             // Build the log content
-            let logText = '';
+            const lines = [];
             log.messages.forEach(msg => {
                 const timestamp = new Date(msg.timestamp).toLocaleString();
                 const messageNumber = msg.message_number ? `#${msg.message_number}` : '-';
@@ -39,24 +39,10 @@ export default {
                     line = `[${timestamp}] ${messageNumber} [${msg.username}]: ${msg.message}\n`;
                 }
 
-                while(line.length >= 50) {
-                    const before = line.lastIndexOf(' ', 50);
-                    const after = line.indexOf(' ', 50);
-
-                    if (!before && !after) {
-                        logText += line.substring(0, 50) + '\n';
-                        line = line.substring(51);
-                    } else if (before) {
-                        logText += line.substring(0, before) + '\n';
-                        line = line.substring(before + 1);
-                    } else {
-                        logText += line.substring(0, after) + '\n';
-                        line = line.substring(after + 1);
-                    }
-                }
-
-                logText += line + '\n';
+                lines.push(line);
             });
+
+            const logText = lines.join('\n');
 
             if (!logText) {
                 return message.channel.send('This ticket contains no messages.');
