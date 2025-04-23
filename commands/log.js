@@ -1,5 +1,6 @@
 import { PermissionFlagsBits } from 'discord.js';
 import TicketLog from '../schemas/ticketLog.js';
+import wrap from 'word-wrap';
 
 export default {
     data: {
@@ -39,7 +40,8 @@ export default {
                     line = `[${timestamp}] ${messageNumber} [${msg.username}]: ${msg.message}\n`;
                 }
 
-                lines.push(line);
+                const wrapped = wrap(line, { width: 50 });
+                lines.push(wrapped);
             });
 
             const logText = lines.join('\n');
