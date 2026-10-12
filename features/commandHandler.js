@@ -10,12 +10,12 @@ export default async (client) => {
         const commandName = args.shift().toLowerCase();
 
         // Look up the command from the client's collection of commands
-        const command = client.commands.find(cmd => cmd.data.name.some(name => name === commandName));
+        const command = client.commands.find(cmd => cmd.data.name.some(name => name == commandName));
 
         if (!command) return;  // Exit if the command is not found
 
         // Exit if incorrect bot is used
-        if (command.data.botType && command.data.botType !== process.env.BOT_TYPE) return;
+        if (command.data.botType && command.data.botType != process.env.BOT_TYPE) return;
 
         // Check for permissions
         if (command.data.permission && !message.member.permissions.has(command.data.permission)) {
@@ -32,7 +32,7 @@ export default async (client) => {
             // Check whitelisted channels
             if (command.data.whitelistedChannelIDs) {
                 for (const channelID of command.data.whitelistedChannelIDs) {
-                    if (message.channel.id === channelID) {
+                    if (message.channel.id == channelID) {
                         isWhitelisted = true;
                         break;
                     }
@@ -50,12 +50,12 @@ export default async (client) => {
             await command.execute(message);
 
             // Optionally delete the original command message
-            if (command.data.deleteMessage !== false) {
+            if (command.data.deleteMessage) {
                 await message.delete();
             }
         } catch (error) {
             console.error(`Error executing command "${commandName}":`, error);
-            message.reply(`There was an error while executing the \`${commandName}\` command!`);
+            message.reply(`There was an error while executing the \`${commandName}\` command! Please contact a developer.`);
         }
     });
 };

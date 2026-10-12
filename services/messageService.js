@@ -1,13 +1,7 @@
 import TicketLog from '../schemas/ticketLog.js';
 
 export default {
-    data: {
-        name: ['accept'],
-        deleteMessage: true,
-        botType: 'Higher Up',
-        description: 'Shortcut for accepting applicants for subteams'
-    },
-    async execute(message) {
+    async sendMessage(message, content) {
         const mainServer = message.client.guilds.cache.get(process.env.GUILD_ID);
 
         // Retrieve the user associated with the ticket channel (stored in the channel's topic)
@@ -23,14 +17,26 @@ export default {
         }
 
         // Generate the next message number for the ticket
-        const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
+        const staffMessages = ticket.messages.filter(msg => msg.message_number != undefined);
         const messageNumber = staffMessages.length > 0 ? staffMessages[staffMessages.length - 1].message_number + 1 : 1;
+
+        // Determine anonymity
+        let anon = false;
+        if (message.content.toLowerCase().includes('-anon')) {
+            anon = true;
+            if (content.toLowerCase().includes('-anon')) {
+                content = content.substring(0, content.toLowerCase().indexOf('-anon')) + content.substring(content.toLowerCase().indexOf('-anon') + 5);
+            }
+        }
         
         // Send the response to the user
-        const response = 'Hello! Thank you for submitting an application. We would love to offer you a spot on our team. Please let us know if you are still interested so we can send you a discord invite!';
         let userMessage;
         try {
-            userMessage = await user.send(`**[${message.member.roles.highest.name}]** <@${message.author.id}>: ${response}`);
+            if (anon) {
+                userMessage = await user.send(content);
+            } else {
+                userMessage = await user.send(`**[${message.member.roles.highest.name}]** <@${message.author.id}>: ${content}`);
+            }
         } catch (error) {
             console.error('Error sending message to user:', error);
             return message.channel.send('Failed to send the response to the user.');
@@ -39,7 +45,11 @@ export default {
         // Reply to the interaction in the channel, visible to staff
         let staffMessage;
         try {
-            staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${response}`);
+            if (anon) {
+                staffMessage = await message.channel.send(`\`${messageNumber}\` ${content}`);
+            } else {
+                staffMessage = await message.channel.send(`\`${messageNumber}\` **${message.author.username}**: ${content}`);
+            }
         } catch (error) {
             console.error('Error sending message to staff channel:', error);
             return message.channel.send('Failed to send the response in the staff channel.');
@@ -57,11 +67,11 @@ export default {
                     $push: {
                         messages: {
                             username: message.author.username,
-                            message: response,
+                            message: content,
                             message_number: messageNumber,
                             user_message_id: userMessage.id,
                             staff_message_id: staffMessage.id,
-                            anonymous: false
+                            anonymous: anon
                         }
                     }
                 },
@@ -74,5 +84,5 @@ export default {
             console.error('Error while updating ticket log:', error);
             return message.channel.send('Failed to update the ticket log, but your message has been sent. This means you cannot edit or delete this message.');
         }
-    }        
+    }
 }

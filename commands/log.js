@@ -7,7 +7,7 @@ export default {
         name: ['log'],
         permission: PermissionFlagsBits.ViewAuditLog,
         deleteMessage: true,
-        whitelistedChannelIDs: ['1321209520369963081'],
+        whitelistedChannelIDs: ['1388664380916367391'],
         description: 'Displays the specified log',
         arguments: '<ticketID>'
     },

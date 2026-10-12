@@ -1,4 +1,4 @@
-import { Client, ActivityType, Partials, Collection, Events, GatewayIntentBits, PresenceUpdateStatus } from 'discord.js';
+import { Client, ActivityType, Partials, Collection, Events, GatewayIntentBits } from 'discord.js';
 import runFeatures from './util/runFeatures.js';
 import dotenv from 'dotenv';
 import getFiles from './util/getFiles.js';
@@ -63,7 +63,7 @@ client.on(Events.ClientReady, () => {
     client.user.setPresence({
         activities: [
             {
-                name: 'Everia SMP',
+                name: 'WildflowerMC',
                 type: ActivityType.Watching
             }
         ]

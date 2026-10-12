@@ -1,4 +1,3 @@
-//const getFiles = require('./getFiles.js');
 import getFiles from './getFiles.js';
 import { fileURLToPath } from 'url';
 import path from 'node:path';

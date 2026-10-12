@@ -1,4 +1,5 @@
 import timeoutStore from '../util/timeoutStore.js';
+import messageService from '../services/messageService.js';
 
 export default {
     data: {
@@ -11,7 +12,7 @@ export default {
         try {
             // Extract and parse the timer argument
             const args = message.content.split(' ').slice(1);
-            let timerInput = args[0] || '15m';
+            let timerInput = args[0] || '20m';
             let cooldown = parseInt(timerInput);
             let unit = 'second(s)';
 
@@ -41,6 +42,10 @@ export default {
                 `Ticket closing in ${parseInt(timerInput)} ${unit}. ` +
                 'Use `!cancel` to abort the ticket closing process.'
             );
+
+            // Send message
+            const response = `This ticket will be closing in **${parseInt(timerInput)} ${unit}**. Please feel free to open a new ticket if you have any further issues. I'm glad we were able to assist you today, and as always, have a fantastic time playing our server!`;
+            messageService.sendMessage(message, response);
 
             // Set timeout
             await timeoutStore.setTimeout(message.channel.id, cooldown);

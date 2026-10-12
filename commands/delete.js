@@ -29,13 +29,13 @@ export default {
             }
 
             // Validate the message number
-            const staffMessages = ticket.messages.filter(msg => msg.message_number !== undefined);
+            const staffMessages = ticket.messages.filter(msg => msg.message_number != undefined);
             if (messageNumber < 1 || messageNumber > staffMessages.length) {
                 return message.channel.send('Invalid message number.');
             }
 
             // Locate the specific message
-            const messageData = staffMessages.find(msg => msg.message_number === messageNumber);
+            const messageData = staffMessages.find(msg => msg.message_number == messageNumber);
             if (!messageData) {
                 return message.channel.send('Message not found.');
             }

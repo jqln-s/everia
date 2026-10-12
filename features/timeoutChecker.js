@@ -9,13 +9,23 @@ export default async (client) => {
 
     // Define embeds to be sent to user
     const thumbnailEmbed = new EmbedBuilder()
-        .setColor(0x2b2d31)
-        .setImage('https://i.imgur.com/9Y2z1J3.png');
-    const userEmbed = new EmbedBuilder()
-        .setColor(0x2b2d31)
-        .setTitle('**Support Ticket ⋆ ｡˚ ⋆**')
-        .setDescription('Your ticket has now been closed. Feel free to make a new ticket by dming this bot if you have any further concerns. As always, thank you for playing Everia and have a magical day! <:Everia_Sparkles:1322328148624412792>')
-        .setImage('https://i.imgur.com/8fD0ASX.png');
+        .setColor(0xfa97b6)
+        .setImage('https://imgur.com/LOaj74d.png');
+    const generalEmbed = new EmbedBuilder()
+        .setColor(0xfa97b6)
+        .setTitle('**Support Ticket ・❀˖°**')
+        .setDescription('**Your ticket has now been closed.** If you need to make a new ticket, just dm this bot again and it will open a new one. Thank you for playing **Wildflower**, we hope you have a farm-tastic day! <:wildflowermc_gtwohearts:1389084052367347772>')
+        .setImage('https://i.imgur.com/EfB9Xlf.png');
+    const higherUpEmbed = new EmbedBuilder()
+        .setColor(0xfa97b6)
+        .setTitle('**Higher Up Support Ticket ・❀˖°**')
+        .setDescription('**Your ticket has now been closed.** If you need to make a new ticket, just dm this bot again and it will open a new one. Thank you for playing **Wildflower**, we hope you have a farm-tastic day! <:wildflowermc_gtwohearts:1389084052367347772>')
+        .setImage('https://i.imgur.com/EfB9Xlf.png');
+    const applicationEmbed = new EmbedBuilder()
+        .setColor(0xfa97b6)
+        .setTitle('**Application Ticket ・❀˖°**')
+        .setDescription('**Thanks again for your interest in the position!** If you did not receive the position, you may reapply in 2 weeks. If you did receive the position, follow the instructions of your lead to get trained for the role. Thank you and have a farm-tastic day! <:wildflowermc_csunflowers:1389085065723646123>')
+        .setImage('https://i.imgur.com/EfB9Xlf.png');
 
 
     async function checkTimeout() {
@@ -48,7 +58,13 @@ export default async (client) => {
                 if (!user) {
                     console.error('User not found.');
                 } else {
-                    await user.send({ embeds: [thumbnailEmbed, userEmbed] });
+                    if (process.env.BOT_TYPE == "General") {
+                        await user.send({ embeds: [thumbnailEmbed, generalEmbed] });
+                    } else if (process.env.BOT_TYPE == "Higher Up") {
+                        await user.send({ embeds: [thumbnailEmbed, higherUpEmbed] });
+                    } else {
+                        await user.send({ embeds: [thumbnailEmbed, applicationEmbed] });
+                    }
                 }
             } catch (error) {
                 console.error(error);
