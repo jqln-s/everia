@@ -6,7 +6,7 @@ export default {
         name: ['logs'],
         permission: PermissionFlagsBits.ViewAuditLog,
         deleteMessage: true,
-        whitelistedChannelIDs: ['1388664380916367391'],
+        whitelistedChannelIDs: ['1321209520369963081'],
         description: 'Displays a list of ticket logs for the specified user',
         arguments: '<userID>'
     },
@@ -43,7 +43,7 @@ export default {
         try {
             // Fetch the closed tickets for the given user
             const docs = await TicketLog.find({ user_id, open: false });
-            if (docs.length == 0) {
+            if (docs.length === 0) {
                 return message.channel.send(`No logs found for <@${user_id}>.`);
             }
 
@@ -61,20 +61,6 @@ export default {
             return message.channel.send('An error occurred while fetching the ticket logs.');
         }
 
-        // Remove higher up logs for general and application bots
-        let newTicketLogs = ticketLogs.slice();
-        for (const log of ticketLogs) {
-            if (log.type == 'Higher Up' && process.env.BOT_TYPE != 'Higher Up') {
-                newTicketLogs.splice(newTicketLogs.indexOf(log), 1);
-            }
-        }
-        ticketLogs = newTicketLogs;
-
-        // Return if all logs are removed
-        if (ticketLogs.length < 1) {
-            return message.channel.send(`No logs found for <@${user_id}>.`);
-        }
-
         // Build the fields for the embed
         const logFields = ticketLogs.map(log => ({
             name: log.type,
@@ -83,7 +69,7 @@ export default {
 
         // Create the embed message to display the log files
         const embed = new EmbedBuilder()
-            .setColor(0xfa97b6)
+            .setColor(0x2b2d31)
             .addFields(logFields)
             .setTimestamp();
 

@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder } from "discord.js";
 
 export default {
     data: {
@@ -12,7 +12,7 @@ export default {
         for (const [command, object] of message.client.commands) {
             const data = object.data;
 
-            if (data.botType && data.botType != process.env.BOT_TYPE) continue;
+            if (data.botType && data.botType !== process.env.BOT_TYPE) continue;
             if (data.permission && !message.member.permissions.has(data.permission)) continue;
 
             if (data.arguments) {
@@ -23,11 +23,10 @@ export default {
         }
 
         const embed = new EmbedBuilder()
-            .setColor(0xfa97b6)
-            .setTitle('Command List ・❀˖°')
+            .setColor(0x2b2d31)
+            .setTitle('Command List ⋆ ｡˚ ⋆')
             .setDescription(embedDesc)
-            .setFooter({ text: 'Tip: Add \'-anon\' to the end of your command to make your message anonymous!' })
-            .setImage('https://i.imgur.com/EfB9Xlf.png');
+            .setImage('https://i.imgur.com/8fD0ASX.png');
 
         message.channel.send({ embeds: [embed] });
     }

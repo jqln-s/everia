@@ -29,7 +29,7 @@ export default async (client) => {
 
         // Reject messages longer than 2000 characters
         if (content.length >= 2000) {
-            return message.channel.send('Message must be less than 2000 characters! If you added images, please send them separately.');
+            return message.channel.send("Message must be less than 2000 characters!");
         }
 
         // Handle existing ticket
@@ -60,7 +60,7 @@ export default async (client) => {
             member = await mainServer.members.fetch(message.author.id);
         }
         if (!member) {
-            return message.channel.send('You must be in the main server to create a ticket. https://discord.gg/DduKkvB6vg');
+            return message.channel.send('You must be in the main server to create a ticket. discord.gg/everia');
         }
 
         // Find previous tickets
@@ -76,8 +76,8 @@ export default async (client) => {
         }
 
         const thumbnailEmbed = new EmbedBuilder()
-            .setColor(0xfa97b6)
-            .setImage('https://imgur.com/LOaj74d.png');
+            .setColor(0x2b2d31)
+            .setImage('https://i.imgur.com/9Y2z1J3.png');
         const staffEmbed = embedService.createStaffEmbed(message, member, text);
         const userEmbed = embedService.createUserEmbed();
         
@@ -91,9 +91,14 @@ export default async (client) => {
                 try {
                     // Send a confirmation message to the user who opened the ticket
                     message.channel.send({ embeds: [thumbnailEmbed, userEmbed] });
+
+                    // Send the staff embed in the new ticket channel
+                    let ping = '<@&1321209517337477222> <@&1321209517211521195>';
+                    if (process.env.BOT_TYPE === 'Higher Up') {
+                        ping = '<@&1321209517337477223> <@&1321209517337477224>';
+                    }
                     
-                    // Send staff embed
-                    channel.send({ embeds: [thumbnailEmbed, staffEmbed] });
+                    channel.send({ embeds: [thumbnailEmbed, staffEmbed], content: ping });
                     channel.send(`<@${message.author.id}>: ${content}`);
                 } catch (error) {
                     console.error('Error sending message: ', error);

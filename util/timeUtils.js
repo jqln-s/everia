@@ -33,5 +33,5 @@ export function formatTime(timeObj) {
     const firstIndex = units.findIndex(unit => unit.value > 0);
     const topFields = units.slice(firstIndex, firstIndex + 3);
 
-    return topFields.map(unit => `${unit.value} ${unit.label}${unit.value != 1 ? 's' : ''}`).join(', ');
+    return topFields.map(unit => `${unit.value} ${unit.label}${unit.value !== 1 ? 's' : ''}`).join(', ');
 }
